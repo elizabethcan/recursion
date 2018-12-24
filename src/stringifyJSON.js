@@ -12,6 +12,11 @@ var stringifyJSON = function(obj) {
   if (typeof(obj) === 'string') {
   	return obj;
   } 
+  // if it's a number use toString and then return the string
+  else if (typeof(obj) === 'number') {
+    obj = obj.toString();
+    stringifyJSON(obj);
+  }
   // if it's a boolean use toString and then return the string
   else if (typeof(obj) === 'boolean') {
   	obj = obj.toString();
@@ -26,6 +31,18 @@ var stringifyJSON = function(obj) {
     // add array[1]
     // add ", "
     // etc.
+    // remove last ", "
+    // add "]"
+    else if (Array.isArray(obj)) {
+      var str = '[';
+      obj.forEach(function(el){
+        str += el;
+        str += ', ';
+      });
+      str = str.slice(0, -2);
+      str += ']';
+      return str;
+    }
 
   // if it's an object create a string that starts with a { then add each key/value pair from the obj and end with another }
     // obj = {'foo': true, 'bar': false, 'baz': null}
@@ -38,4 +55,7 @@ var stringifyJSON = function(obj) {
     // add array[0][1]
     // add ", "
     // etc.
+
+    // IMPORTANT: only the outermost layer should be stringified. Anything inside an array or obj should keep the same typeof
+    // this means that strings should remain strings and numbers should remain numbers, etc
 };
