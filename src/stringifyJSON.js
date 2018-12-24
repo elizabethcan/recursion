@@ -36,10 +36,13 @@ var stringifyJSON = function(obj) {
     else if (Array.isArray(obj)) {
       var str = '[';
       obj.forEach(function(el){
-        str += el;
-        str += ', ';
+        if(typeof(el) === 'string') {
+          str += `"${el}",`;
+        } else {
+          str += `${el},`;
+        }
       });
-      str = str.slice(0, -2);
+      str = str.slice(0, -1);
       str += ']';
       return str;
     }
