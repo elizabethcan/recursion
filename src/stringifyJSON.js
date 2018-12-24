@@ -20,28 +20,39 @@ var stringifyJSON = function(obj) {
   // for object str += '{'
     // if (Object.keys(currentObject).length > 0)
       // for each key in obj
-        // str += `${key}: `
+        // str += `"${key}": `
         // call stringifyJSON on the value
         // str += ','
       // str.slice (0, -1)
     // str += '}'
 
-
-  var str = '';
+  if (typeof obj === "string") {
+    return `"${obj}"`
+  }
   if (Array.isArray(obj)) {
-    var str += '[';
-    obj.forEach(function(el){
-      if(typeof(el) === 'string') {
-        str += `"${el}",`;
-      } else {
-        str += `${el},`;
-      }
-    });
-    str = str.slice(0, -1);
-    str += ']';
-    return str;
-  } else {
-      str += obj;
+    str += "[";
+    if (obj.length > 0) {
+      obj.forEach(function(el){
+        stringifyJSON(el);
+      });
+      str = str.slice(0, -1);
     }
-  return str;
+    str += "]";
+  } else if (typeof obj === 'object') {
+    str += "{";
+    if (Object.keys(obj).length > 0) {
+      for (var key in obj) {
+        str += `"${key}":`;
+        stringifyJSON(obj[key]);
+        str += ",";
+      }
+      str.slice(0, -1);
+    }
+    str += "}";
+  } else if (typeof obj === "string") {
+    str += `"${obj}"`;
+  }
+  else {
+      str += obj;
+  }
 };
