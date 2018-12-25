@@ -43,9 +43,11 @@ var stringifyJSON = function(obj) {
     str += "{";
     if (Object.keys(obj).length > 0) {
       for (var key in obj) {
-        str += `"${key}":`;
-        str += stringifyJSON(obj[key]);
-        str += ",";
+        if (typeof obj[key] !== "function" && obj[key] !== undefined) {
+          str += `"${key}":`;
+          str += stringifyJSON(obj[key]);
+          str += ",";
+        }
       }
       str = str.slice(0, -1);
     }
