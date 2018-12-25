@@ -4,28 +4,6 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  // mission: take in an obj and add each character to a string, return entire string
-  // base case: no more elements in obj to add to string
-  // remove the element you just added to your string from the obj
-
-  // start with str = ''
-  // for string, number, boolean, null str += obj (element)
-  // for array str += '['
-    // if (array.length > 0)
-      // for each element in the array 
-        // call stringifyJSON
-        // str += ','
-      // str.slice(0, -1)   
-    // str += ']'
-  // for object str += '{'
-    // if (Object.keys(currentObject).length > 0)
-      // for each key in obj
-        // str += `"${key}": `
-        // call stringifyJSON on the value
-        // str += ','
-      // str.slice (0, -1)
-    // str += '}'
-
   var str = '';
   if (obj === null) {
     str += 'null';
@@ -49,7 +27,9 @@ var stringifyJSON = function(obj) {
           str += ",";
         }
       }
-      str = str.slice(0, -1);
+      if (str[str.length - 1] == ",") {
+        str = str.slice(0, -1);
+      }
     }
     str += "}";
   } else if (typeof obj === "string") {
@@ -59,7 +39,3 @@ var stringifyJSON = function(obj) {
   }
   return str;
 };
-
-/*var stringifyJSON = function(obj) {
-
-}*/
