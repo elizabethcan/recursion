@@ -11,8 +11,7 @@ var stringifyJSON = function(obj) {
     str += "[";
     if (obj.length > 0) {
       obj.forEach(function(el){
-        str += stringifyJSON(el);
-        str += ",";
+        str += `${stringifyJSON(el)},`;
       });
       str = str.slice(0, -1);
     }
@@ -22,9 +21,7 @@ var stringifyJSON = function(obj) {
     if (Object.keys(obj).length > 0) {
       for (var key in obj) {
         if (typeof obj[key] !== "function" && obj[key] !== undefined) {
-          str += `"${key}":`;
-          str += stringifyJSON(obj[key]);
-          str += ",";
+          str += `"${key}":${stringifyJSON(obj[key])},`;
         }
       }
       if (str[str.length - 1] == ",") {
