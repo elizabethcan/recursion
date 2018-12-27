@@ -10,7 +10,7 @@ var htmlStrings = [
 
 describe('getElementsByClassName', function() {
 
-  /*it('should match the results of calling the built-in function', function() {
+  it('should match the results of calling the built-in function', function() {
     $('body').addClass('targetClassName');
     htmlStrings.forEach(function(htmlString) {
       var $rootElement = $(htmlString);
@@ -24,7 +24,7 @@ describe('getElementsByClassName', function() {
       $rootElement.remove();
     });
     $('body').removeClass('targetClassName');
-  });*/
+  });
 
   it('should match the results of calling the built-in function', function() {
     $('body').addClass('targetClassName');
@@ -99,7 +99,7 @@ describe('getElementsByClassName', function() {
     });
     $('body').removeClass('targetClassName');
 
-  /*it('should match the results of calling the built-in function', function() {
+  it('should match the results of calling the built-in function', function() {
     $('body').addClass('targetClassName');
       var $rootElement = $('<div><div></div><div><div class="targetClassName"></div></div></div>');
       $('body').append($rootElement);
@@ -152,5 +152,4 @@ describe('getElementsByClassName', function() {
       $rootElement.remove();
     });
     $('body').removeClass('targetClassName');
-*/
 });
