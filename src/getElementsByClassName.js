@@ -4,7 +4,7 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className) {
+var getElementsByClassName = function(className, currentElement) {
   // output: returns an array-like object of all child elements which have all of the given class names
 
   // document.body selects the whole body
@@ -27,9 +27,11 @@ var getElementsByClassName = function(className) {
     // if an element matches, push elementsArr[i] to resultArr
 
   var result = [];
-  var currentElement = currentElement || document.body;
-  if (currentElement.classList.contains(className)) {
-    result.push(currentElement);
+  if (!currentElement) {
+    var currentElement = currentElement || document.body;
+    if (currentElement.classList.contains(className)) {
+      result.push(currentElement);
+    }
   }
   // this is the part i want to repeat for every layer of elements
   if (currentElement.children.length > 0) {
@@ -57,6 +59,7 @@ var getElementsByClassName = function(className) {
           }
         });
       }
+      //getElementsByClassName(className, el);
     });
   }
   
