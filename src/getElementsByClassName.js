@@ -31,22 +31,34 @@ var getElementsByClassName = function(className) {
   if (currentElement.classList.contains(className)) {
     result.push(currentElement);
   }
-  currentElement = currentElement.children;
   // this is the part i want to repeat for every layer of elements
-  Array.prototype.forEach.call(currentElement, function(el) {
-    // the line below appears on line 31-32
-    if(el.classList.contains(className)) {
-      result.push(el);
-    }
-    if(el.children.length > 0) {
-      Array.prototype.forEach.call(el.children, function(item) {
-        // the line below appears on line 31-32
-        if(item.classList.contains(className)) {
-          result.push(item);
-        }
-      });
-    }
-  });
+  if (currentElement.children.length > 0) {
+    currentElement = currentElement.children;
+    Array.prototype.forEach.call(currentElement, function(el) {
+      // the line below appears on line 31-32
+      if(el.classList.contains(className)) {
+        result.push(el);
+      }
+      if(el.children.length > 0) {
+        currentElement = el.children;
+        Array.prototype.forEach.call(currentElement, function(el) {
+          // the line below appears on line 31-32
+          if(el.classList.contains(className)) {
+            result.push(el);
+          }
+          if(el.children.length > 0) {
+            currentElement = el.children;
+            Array.prototype.forEach.call(currentElement, function(el) {
+              // the line below appears on line 31-32
+              if(el.classList.contains(className)) {
+                result.push(el);
+              }
+            });
+          }
+        });
+      }
+    });
+  }
   
   console.log("result:");
   console.log(result);

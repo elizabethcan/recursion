@@ -81,7 +81,7 @@ describe('getElementsByClassName', function() {
     });
     $('body').removeClass('targetClassName');
 
-  /*it('should match the results of calling the built-in function', function() {
+  it('should match the results of calling the built-in function', function() {
     $('body').addClass('targetClassName');
       var $rootElement = $('<div><div class="targetClassName"><div class="targetClassName"></div></div></div>');
       $('body').append($rootElement);
@@ -99,7 +99,7 @@ describe('getElementsByClassName', function() {
     });
     $('body').removeClass('targetClassName');
 
-  it('should match the results of calling the built-in function', function() {
+  /*it('should match the results of calling the built-in function', function() {
     $('body').addClass('targetClassName');
       var $rootElement = $('<div><div></div><div><div class="targetClassName"></div></div></div>');
       $('body').append($rootElement);
